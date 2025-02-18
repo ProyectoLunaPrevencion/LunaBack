@@ -47,5 +47,4 @@ public class ControladorPostPizarra {
         servicioPostPizarra.eliminarPostPizarra(id);
     }
 
-
 }
