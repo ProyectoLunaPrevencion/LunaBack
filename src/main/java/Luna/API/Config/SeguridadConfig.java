@@ -9,14 +9,19 @@ import org.springframework.security.config.Customizer;
 @Configuration
 public class SeguridadConfig {
 
- @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .cors(Customizer.withDefaults()) // Habilitar CORS correctamente
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/api/postsPizarra").permitAll()
+                .requestMatchers("/api/reportes").permitAll()
+                .requestMatchers("/api/seguimiento").permitAll()
+                .requestMatchers("/api/usuarios").permitAll()
                 .requestMatchers("/api/usuarios/registro").permitAll() 
                 .requestMatchers("/api/auth/login").permitAll()
-                //añadir roles con permisos para cada request CED ☺
+                // Añadir roles con permisos para cada request CED ☺
 
                 .anyRequest().authenticated()
             )
