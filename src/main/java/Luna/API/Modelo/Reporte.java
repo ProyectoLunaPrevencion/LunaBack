@@ -15,7 +15,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-
 @Entity
 @Table(name = "Reportes")
 public class Reporte {
@@ -25,9 +24,9 @@ public class Reporte {
     @Column(name = "id_reporte")
     private Integer idReporte;    
 
-@ManyToOne
-@JoinColumn(name = "id_usuario", nullable = false)
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Usuario usuario;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -36,6 +35,10 @@ public class Reporte {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
     private MotivoReporte motivo;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private DondeLoVio dondeLoVio;
 
     @Column(name = "fecha_reporte", nullable = false)
     private LocalDateTime fechaReporte;
@@ -50,17 +53,22 @@ public class Reporte {
     }
 
     public Reporte(Integer idReporte, Usuario usuario, String descripcion, MotivoReporte motivo,
-                   LocalDateTime fechaReporte, LocalDateTime createdAt) {
+                   DondeLoVio dondeLoVio, LocalDateTime fechaReporte, LocalDateTime createdAt) {
         this.idReporte = idReporte;
         this.usuario = usuario;
         this.descripcion = descripcion;
         this.motivo = motivo;
+        this.dondeLoVio = dondeLoVio;
         this.fechaReporte = (fechaReporte != null) ? fechaReporte : LocalDateTime.now();
         this.createdAt = (createdAt != null) ? createdAt : LocalDateTime.now();
     }
 
     public enum MotivoReporte {
         ACOSO, MALESTAR_EMOCIONAL, PROBLEMA_ACADEMICO, OTROS
+    }
+
+    public enum DondeLoVio {
+        EN_CLASE, EN_PATIO, EN_PASILLOS, EN_REDES_SOCIALES, OTRO
     }
 
     //#region Getters y Setters
@@ -97,6 +105,14 @@ public class Reporte {
         this.motivo = motivo;
     }
 
+    public DondeLoVio getDondeLoVio() {
+        return dondeLoVio;
+    }
+
+    public void setDondeLoVio(DondeLoVio dondeLoVio) {
+        this.dondeLoVio = dondeLoVio;
+    }
+
     public LocalDateTime getFechaReporte() {
         return fechaReporte;
     }
@@ -113,17 +129,17 @@ public class Reporte {
         this.createdAt = createdAt;
     }
     //#endregion
-   
-        @Override
+
+    @Override
     public String toString() {
         return "Reporte{" +
                 "idReporte=" + idReporte +
                 ", usuario=" + usuario +
                 ", descripcion='" + descripcion + '\'' +
                 ", motivo=" + motivo +
+                ", dondeLoVio=" + dondeLoVio +
                 ", fechaReporte=" + fechaReporte +
                 ", createdAt=" + createdAt +
                 '}';
     }
-     
 }
