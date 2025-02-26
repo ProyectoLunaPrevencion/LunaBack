@@ -32,6 +32,7 @@ public class ServicioReporte {
             r.setUsuario(reporte.getUsuario());
             r.setDescripcion(reporte.getDescripcion());
             r.setMotivo(reporte.getMotivo());
+            r.setDondeLoVio(reporte.getDondeLoVio()); 
             r.setFechaReporte(reporte.getFechaReporte());
             r.setCreatedAt(reporte.getCreatedAt());
             return repositorioReporte.save(r);

@@ -1,12 +1,13 @@
 package Luna.API.Servicio;
 
-import Luna.API.Modelo.Usuario;
-import Luna.API.Repositorio.RepositorioUsuario;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import Luna.API.Modelo.Usuario;
+import Luna.API.Repositorio.RepositorioUsuario;
 
 @Service
 public class ServicioUsuario {
@@ -18,15 +19,14 @@ public class ServicioUsuario {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    
     public Usuario registrarUsuario(Usuario usuario) {
-  
         if (repositorioUsuario.findByEmail(usuario.getEmail()).isPresent()) {
             throw new RuntimeException("El email ya está en uso.");
         }
-            
+        
         if (usuario.getNombre() == null || usuario.getApellidos() == null ||
-            usuario.getRol() == null || usuario.getCurso() == null || usuario.getGrupo() == null) {
+            usuario.getRol() == null || usuario.getCurso() == null || usuario.getGrupo() == null ||
+            usuario.getTelefono() == null) {
             throw new RuntimeException("Todos los campos son obligatorios.");
         }
     
@@ -35,7 +35,6 @@ public class ServicioUsuario {
         return repositorioUsuario.save(usuario);
     }
     
-
     public Optional<Usuario> buscarPorEmail(String email) {
         return repositorioUsuario.findByEmail(email);
     }
@@ -50,6 +49,7 @@ public class ServicioUsuario {
             u.setApellidos(usuario.getApellidos());
             u.setEmail(usuario.getEmail());
             u.setPassword(passwordEncoder.encode(usuario.getPassword()));
+            u.setTelefono(usuario.getTelefono());
             return repositorioUsuario.save(u);
         }).orElse(null);
     }
@@ -58,7 +58,7 @@ public class ServicioUsuario {
         repositorioUsuario.deleteById(id);
     }
 
-   public List<Usuario> obtenerTodos() {
+    public List<Usuario> obtenerTodos() {
         return repositorioUsuario.findAll();
     }
 

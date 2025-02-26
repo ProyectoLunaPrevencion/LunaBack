@@ -32,6 +32,9 @@ public class Usuario {
     @Column(nullable = false, length = 255)
     private String password; // Debe almacenar el hash, no la contraseña tal cual
 
+    @Column(nullable = false, length = 15, unique = true)
+    private String telefono;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Rol rol;
@@ -51,20 +54,20 @@ public class Usuario {
         this.fechaRegistro = LocalDateTime.now();
     }
 
-    public Usuario(Integer idUsuario, String nombre, String apellidos, String email, String password,
+    public Usuario(Integer idUsuario, String nombre, String apellidos, String email, String password, String telefono,
                    Rol rol, Curso curso, Grupo grupo, LocalDateTime fechaRegistro) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email;
         this.password = password;
+        this.telefono = telefono;
         this.rol = rol;
         this.curso = curso;
         this.grupo = grupo;
         this.fechaRegistro = (fechaRegistro != null) ? fechaRegistro : LocalDateTime.now();
     }
 
-    
     public enum Rol {
         ESTUDIANTE, PROFESOR, ORIENTACION
     }
@@ -79,7 +82,6 @@ public class Usuario {
 
     //#region Getters y Setters
 
-    
     public Integer getIdUsuario() {
         return idUsuario;
     }
@@ -118,6 +120,14 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public Rol getRol() {
@@ -162,6 +172,7 @@ public class Usuario {
                 ", apellidos='" + apellidos + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", telefono='" + telefono + '\'' +
                 ", rol=" + rol +
                 ", curso=" + curso +
                 ", grupo=" + grupo +
