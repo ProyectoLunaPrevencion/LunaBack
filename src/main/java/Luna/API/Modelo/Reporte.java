@@ -37,7 +37,7 @@ public class Reporte {
     private MotivoReporte motivo;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 30)
+    @Column(name = "donde_lo_vio", nullable = false, length = 30)
     private DondeLoVio dondeLoVio;
 
     @Column(name = "fecha_reporte", nullable = false)

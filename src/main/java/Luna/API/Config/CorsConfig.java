@@ -13,10 +13,16 @@ public class CorsConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(@NonNull CorsRegistry registry) {
-                        registry.addMapping("/**")
-                                .allowedOrigins("http://localhost:5173")
-                                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                                .allowCredentials(true);
+                registry.addMapping("/**")
+                    .allowedOrigins(
+                        "http://localhost:3000",  // Desarrollo
+                        "https://futurapagina.jejexd"   // Producción
+                    )
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .exposedHeaders("Authorization", "Content-Type")  // Headers visibles al front
+                    .allowCredentials(true)
+                    .maxAge(3600);  // Cache de CORS por 1 hora
             }
         };
     }

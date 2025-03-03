@@ -58,7 +58,7 @@ public class TestControladorReportes {
     @Test
     void testActualizarReporte() {
         Reporte updateReporte = new Reporte();
-        // Se asocia nuevamente el usuario dummy
+        
         Usuario usuarioDummy = new Usuario();
         usuarioDummy.setIdUsuario(9999);
         updateReporte.setUsuario(usuarioDummy);
