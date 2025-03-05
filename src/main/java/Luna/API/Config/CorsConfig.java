@@ -15,7 +15,7 @@ public class CorsConfig {
             public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")
                     .allowedOrigins(
-                        "http://localhost:3000",  // Desarrollo
+                        "http://localhost:5173",  // Desarrollo
                         "https://futurapagina.jejexd"   // Producción
                     )
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")

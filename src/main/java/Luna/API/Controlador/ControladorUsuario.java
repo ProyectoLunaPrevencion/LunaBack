@@ -1,11 +1,14 @@
 package Luna.API.Controlador;
 
+import Luna.API.Config.JwtUtil;
 import Luna.API.Modelo.Usuario;
 import Luna.API.Servicio.ServicioUsuario;
+import io.jsonwebtoken.Claims;
 
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class ControladorUsuario {
 
     private final ServicioUsuario servicioUsuario;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     public ControladorUsuario(ServicioUsuario servicioUsuario) {
         this.servicioUsuario = servicioUsuario;
@@ -33,9 +39,19 @@ public class ControladorUsuario {
     public List<Usuario> listaUsuarios() {
         return servicioUsuario.obtenerTodos();
     }
+    
+    @GetMapping("/current")
+    public Optional<Usuario> obtenerUsuarioActual(@RequestHeader("Authorization") String bearerToken) {
+        String token = bearerToken.substring(7);
+        Claims tokenClaims = jwtUtil.extraerClaims(token);
+
+        int var = (int) tokenClaims.get("userId");
+
+        return servicioUsuario.buscarPorId(var);
+    }
 
     @GetMapping("/{id}")
-       public Optional<Usuario> obtenerUsuario(@PathVariable Integer id) {
+    public Optional<Usuario> obtenerUsuario(@PathVariable Integer id) {
         return servicioUsuario.buscarPorId(id);
     }
 
