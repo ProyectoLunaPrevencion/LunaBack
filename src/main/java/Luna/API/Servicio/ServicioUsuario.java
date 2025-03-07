@@ -55,7 +55,7 @@ public class ServicioUsuario {
             if (parameters.getApellidos() != null && parameters.getApellidos() != "") {
                 usuarioFromDatabase.setApellidos(parameters.getApellidos());
             }
-            if (parameters.getTelefono() != null && parameters.getTelefono() != "") {
+            if (parameters.getTelefono() != null) {
                 usuarioFromDatabase.setTelefono(parameters.getTelefono());
             }
             if (parameters.getCurso() != null && !parameters.getCurso().toString().isEmpty()) {
