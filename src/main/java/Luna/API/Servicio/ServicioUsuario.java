@@ -52,6 +52,18 @@ public class ServicioUsuario {
             if (parameters.getNombre() != null && parameters.getNombre() != "") {
                 usuarioFromDatabase.setNombre(parameters.getNombre());
             }
+            if (parameters.getApellidos() != null && parameters.getApellidos() != "") {
+                usuarioFromDatabase.setApellidos(parameters.getApellidos());
+            }
+            if (parameters.getTelefono() != null && parameters.getTelefono() != "") {
+                usuarioFromDatabase.setTelefono(parameters.getTelefono());
+            }
+            if (parameters.getCurso() != null && !parameters.getCurso().toString().isEmpty()) {
+                usuarioFromDatabase.setCurso(parameters.getCurso());
+            }
+            if (parameters.getGrupo() != null && !parameters.getGrupo().toString().isEmpty()) {
+                usuarioFromDatabase.setGrupo(parameters.getGrupo());
+            }
 
             return repositorioUsuario.save(usuarioFromDatabase);
         }).orElse(null);
