@@ -37,6 +37,7 @@ public class SeguridadConfig {
                 .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/usuarios/registro").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/postsPizarra").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/usuarios/current").authenticated()
                 .requestMatchers("/**").hasRole("ORIENTACION")                
                 .anyRequest().authenticated()
             )
