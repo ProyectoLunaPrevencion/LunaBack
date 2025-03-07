@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import Luna.API.Modelo.Usuario;
 import Luna.API.Repositorio.RepositorioUsuario;
+import Luna.API.Requests.UsuarioPutRequest;
 
 @Service
 public class ServicioUsuario {
@@ -43,14 +44,16 @@ public class ServicioUsuario {
         return repositorioUsuario.findById(id);
     }
 
-    public Usuario actualizarUsuario(Integer id, Usuario usuario) {
-        return repositorioUsuario.findById(id).map(u -> {
-            u.setNombre(usuario.getNombre());
-            u.setApellidos(usuario.getApellidos());
-            u.setEmail(usuario.getEmail());
-            u.setPassword(passwordEncoder.encode(usuario.getPassword()));
-            u.setTelefono(usuario.getTelefono());
-            return repositorioUsuario.save(u);
+    public Usuario actualizarUsuario(Integer id, UsuarioPutRequest parameters) {
+
+        System.out.println("Hola");
+        
+        return repositorioUsuario.findById(id).map(usuarioFromDatabase -> {
+            if (parameters.getNombre() != null && parameters.getNombre() != "") {
+                usuarioFromDatabase.setNombre(parameters.getNombre());
+            }
+
+            return repositorioUsuario.save(usuarioFromDatabase);
         }).orElse(null);
     }
 

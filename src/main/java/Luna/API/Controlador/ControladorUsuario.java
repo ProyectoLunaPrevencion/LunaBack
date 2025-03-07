@@ -2,6 +2,7 @@ package Luna.API.Controlador;
 
 import Luna.API.Config.JwtUtil;
 import Luna.API.Modelo.Usuario;
+import Luna.API.Requests.UsuarioPutRequest;
 import Luna.API.Servicio.ServicioUsuario;
 import io.jsonwebtoken.Claims;
 
@@ -56,7 +57,10 @@ public class ControladorUsuario {
     }
 
     @PutMapping("/{id}")
-    public Usuario actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
+    public Usuario actualizarUsuario(@PathVariable Integer id, @RequestBody UsuarioPutRequest usuario) {
+        System.out.println("hola");
+        System.out.println(id);
+        System.out.println(usuario);
         return servicioUsuario.actualizarUsuario(id, usuario);
     }
 
