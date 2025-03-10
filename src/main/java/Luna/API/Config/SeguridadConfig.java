@@ -39,7 +39,7 @@ public class SeguridadConfig {
                 .requestMatchers(HttpMethod.GET, "/api/postsPizarra").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/usuarios/current").authenticated()
                 .requestMatchers(HttpMethod.PUT, "/api/usuarios/{id}").authenticated()
-                .requestMatchers(HttpMethod.POST, "/api/reportes").hasRole("ESTUDIANTE")            
+                .requestMatchers(HttpMethod.POST, "/api/reportes").hasRole("ESTUDIANTE")           
                 .requestMatchers("/**").hasRole("ORIENTACION") 
                 .anyRequest().authenticated()
             )

@@ -1,4 +1,5 @@
 package Luna.API.Repositorio;
+import java.util.List; 
 
 
 import java.time.LocalDateTime;
@@ -13,4 +14,5 @@ import Luna.API.Modelo.Seguimiento;
 public interface RepositorioSeguimiento extends JpaRepository<Seguimiento, Integer> {
     Optional<Seguimiento> findByEstado(String estado);
     Optional<Seguimiento> findByFechaActualizacion(LocalDateTime fecha);
+     List<Seguimiento> findByReporteIdReporte(Integer idReporte);
 }

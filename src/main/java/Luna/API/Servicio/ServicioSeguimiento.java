@@ -41,4 +41,8 @@ public class ServicioSeguimiento {
 
     }
 
+    public List<Seguimiento> obtenerSeguimientosPorReporteId(Integer idReporte) {
+        return repositorioSeguimiento.findByReporteIdReporte(idReporte);
+    }
+
 }
