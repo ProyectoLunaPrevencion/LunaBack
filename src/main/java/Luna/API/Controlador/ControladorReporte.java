@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Luna.API.Modelo.Reporte;
+import Luna.API.Modelo.Seguimiento;
 import Luna.API.Servicio.ServicioReporte;
+import Luna.API.Servicio.ServicioSeguimiento;
 
 @RestController
 @RequestMapping("/api/reportes")
@@ -22,6 +24,9 @@ public class ControladorReporte {
 
     @Autowired
     private ServicioReporte servicioReporte;
+
+    @Autowired
+    private ServicioSeguimiento servicioSeguimiento; 
 
     @GetMapping
     public List<Reporte> listarReportes() {
@@ -46,5 +51,10 @@ public class ControladorReporte {
     @DeleteMapping("/{id}")
     public void eliminarReporte(@PathVariable Integer id) {
         servicioReporte.eliminarReporte(id);
+    }
+
+    @GetMapping("/{id}/seguimiento")
+    public List<Seguimiento> obtenerSeguimientosPorReporte(@PathVariable Integer id) {
+        return servicioSeguimiento.obtenerSeguimientosPorReporteId(id);
     }
 }
