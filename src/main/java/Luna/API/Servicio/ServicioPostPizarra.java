@@ -29,9 +29,7 @@ public class ServicioPostPizarra {
 
     public PostsPizarra actualizarPostPizarra(Integer id, PostsPizarra postPizarra) {
         return repositorioPostPizarra.findById(id).map(r -> {
-            r.setUsuario(postPizarra.getUsuario());
             r.setContenido(postPizarra.getContenido());
-            r.setCreatedAt(postPizarra.getCreatedAt());
             return repositorioPostPizarra.save(r);
         }).orElse(null);
     }
