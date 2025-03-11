@@ -29,7 +29,6 @@ public class ServicioSeguimiento {
 
     public Seguimiento actualizarSeguimiento(Integer id, Seguimiento seguimiento) {
         return repositorioSeguimiento.findById(id).map(s -> {
-            s.setReporte(seguimiento.getReporte());
             s.setEstado(seguimiento.getEstado());
             s.setComentarios(seguimiento.getComentarios());
             return repositorioSeguimiento.save(s);
