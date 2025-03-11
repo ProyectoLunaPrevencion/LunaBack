@@ -64,6 +64,12 @@ public class ServicioUsuario {
             if (parameters.getGrupo() != null && !parameters.getGrupo().toString().isEmpty()) {
                 usuarioFromDatabase.setGrupo(parameters.getGrupo());
             }
+            if (parameters.getRol() != null && !parameters.getRol().toString().isEmpty()) {
+                usuarioFromDatabase.setRol(parameters.getRol());
+            }
+            if (parameters.getEmail() != null && parameters.getEmail() != "") {
+                usuarioFromDatabase.setEmail(parameters.getEmail());
+            }
 
             return repositorioUsuario.save(usuarioFromDatabase);
         }).orElse(null);
